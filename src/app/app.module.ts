@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Custome components
 import { ComponentsModule } from './components/components.module';
+// import { TabsRoutingModule } from './pages/tabs/tabs-routing.module';
 
 @NgModule({
   declarations: [AppComponent],

@@ -28,6 +28,6 @@ export class LoginPage implements OnInit {
   }
 
   onLogin() {
-    this.router.navigateByUrl('home', { replaceUrl: true });
+    this.router.navigateByUrl('home/tabs/tab1', { replaceUrl: true });
   }
 }

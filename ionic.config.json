@@ -1,5 +1,7 @@
 {
-  "name": "mochileros",
-  "integrations": {},
+  "name": "Mochileros",
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -13,9 +13,10 @@ export class SlideComponent implements OnInit {
   };
 
   slides = [
-    { texto: 'Organiza y ahorra dinero', url: 'assets/images/save-your-money.png', numero: 1 },
-    { texto: 'Los mejores lugares para visitar', url: 'assets/images/where-to-travel.png', numero: 2 },
-    { texto: 'La mejor comida regional', url: 'assets/images/local-food.png', numero: 3 },
+    { texto: 'Planea, organiza y ahorra dinero', url: 'assets/images/money.svg', numero: 1 },
+    { texto: 'Los mejores lugares para hospedarte', url: 'assets/images/hotel.svg', numero: 2 },
+    { texto: 'La mejor comida regional', url: 'assets/images/eating.svg', numero: 3 },
+    { texto: 'Las actividades más divertidas', url: 'assets/images/biking.svg', numero: 4 },
   ];
 
   constructor(
