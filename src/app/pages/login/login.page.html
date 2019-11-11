@@ -1,0 +1,25 @@
+<ion-content class="ion-padding ion-text-center">
+  <ion-grid style="height: 100%">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <div>
+        <div class="login-image">
+          <ion-img src="assets/images/login.png"></ion-img>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <ion-item class="ion-margin">
+            <ion-label position="floating">Correo</ion-label>
+            <ion-input required formControlName="emailUser" type="text"></ion-input>
+          </ion-item>
+          <ion-item class="ion-margin">
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input required formControlName="passwordUser" type="password"></ion-input>
+          </ion-item>
+          <ion-button expand="block" shape="round" color="primary" type="submit">
+            <!--[disabled]="loginForm.invalid"-->
+            Iniciar Sesión
+          </ion-button>
+        </form>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>
