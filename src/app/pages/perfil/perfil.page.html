@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-text-center">
+  <ion-avatar style="margin: auto">
+    <img
+      [src]="(user?.photoURL) ? user.photoURL : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" />
+  </ion-avatar>
+  <h2>Hola {{(user?.displayName) ? user.displayName : 'Usuario bonito'}}</h2>
+  <p>{{user?.email}}</p>
+</ion-content>

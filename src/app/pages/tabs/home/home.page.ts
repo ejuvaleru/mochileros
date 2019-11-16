@@ -1,29 +1,25 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
+import { AuthService } from 'src/app/shared/auth.service';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  darkMode = true;
+  user: any;
 
   constructor(
-    private router: Router
-  ) {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    this.darkMode = prefersDark.matches;
-  }
-
-  isDarkMode() {
-    // const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    this.darkMode = !this.darkMode;
-    document.body.classList.toggle('dark');
-  }
-
-  onClick() {
-    this.router.navigateByUrl('');
+    private authService: AuthService,
+  ) {}
+  
+  ngOnInit() {
+    // console.log(this.authService.isLoggedIn());
+    this.authService.userDetails().subscribe(user =>{
+      this.user = user
+    });
   }
 }

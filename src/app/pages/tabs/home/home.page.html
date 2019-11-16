@@ -8,13 +8,5 @@
 </ion-header>
 <ion-content class="ion-padding ion-text-center">
   ¡Aquí va la mejor app de Mochileros del mundo!
-  <p>En construcción...</p>
-  <ion-button (click)="onClick()" fill="solid" shape="round">
-    Tutorial
-  </ion-button>
-  <ion-item lines="none">
-    <ion-icon slot="start" name="moon"></ion-icon>
-    <ion-label>Dark mode</ion-label>
-    <ion-toggle slot="end" [ngModel]="darkMode" [checked]="darkMode" (ionChange)="isDarkMode()"></ion-toggle>
-  </ion-item>
+  <p>En construcción... Hola {{user?.email}}</p>
 </ion-content>

@@ -8,13 +8,13 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-          <ion-item class="menu-item" lines="none" routerLink="/profile">
+          <ion-item class="menu-item" lines="none" routerLink="/perfil">
             <ion-icon name="person" slot="start"></ion-icon>
             <ion-label class="menu-label">Perfil</ion-label>
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item class="menu-item" lines="none" routerLink="/profile">
+          <ion-item class="menu-item" lines="none" routerLink="/configuracion">
             <ion-icon name="settings" slot="start"></ion-icon>
             <ion-label class="menu-label">Configuración</ion-label>
           </ion-item>
@@ -23,9 +23,9 @@
     </ion-content>
     <ion-footer>
       <ion-menu-toggle>
-        <ion-item class="menu-item" lines="none" routerLink="/profile">
+        <ion-item class="menu-item" lines="none" (click)="logOut()" button>
           <ion-icon name="exit" slot="start"></ion-icon>
-          <ion-label class="menu-label">Cerrar sesión</ion-label>
+          <ion-label class="menu-label" style="font-size: 16px">Cerrar sesión</ion-label>
         </ion-item>
       </ion-menu-toggle>
     </ion-footer>
