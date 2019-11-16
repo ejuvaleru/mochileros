@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule), canActivate: [SecurePagesGuard] },
   { path: 'home', loadChildren: './pages/tabs/tabs.module#TabsPageModule', canActivate: [SecureAuthGuard] },
   { path: 'perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule', canActivate: [SecureAuthGuard] },
-  { path: 'configuracion', loadChildren: './pages/configuracion/configuracion.module#ConfiguracionPageModule', canActivate: [SecureAuthGuard] },
+  { path: 'configuracion', loadChildren: './pages/configuracion/configuracion.module#ConfiguracionPageModule', canActivate: [SecureAuthGuard] },  { path: 'crear-trip', loadChildren: './pages/trip/crear-trip/crear-trip.module#CrearTripPageModule' },
+
 
 
 ];

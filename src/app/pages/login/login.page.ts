@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 // Mis imports
 import { AuthService } from 'src/app/shared/auth.service';
 import { UsuarioNuevo } from 'src/app/models/usuario_nuevo_model';
+import { UserFromFirebase } from 'src/app/models/usuario_from_fire_model';
 
 @Component({
   selector: 'app-login',
@@ -92,8 +93,16 @@ export class LoginPage implements OnInit {
     } // Si el usuario selecciona registrarme, la variable booleana cambia y permite mandar este método
     else {
       this.authService.registerFromEmailAndPassword(this.usuario).then(res => {
-        console.log('Register', res);
+        console.log('Register', res.user);
         this.errorMessage = "";
+        const userData: UserFromFirebase = {
+          uid: res.user.uid,
+          email: res.user.email,
+          displayName: res.user.displayName,
+          photoURL: res.user.photoURL,
+          emailVerified: res.user.emailVerified,
+        };
+        this.authService.setUserData(userData);
         this.router.navigateByUrl('home/tabs/tab1', { replaceUrl: true });
       },
         err => {

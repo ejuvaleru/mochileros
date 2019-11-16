@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { UsuarioNuevo } from '../models/usuario_nuevo_model';
+import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
+import { UserFromFirebase } from '../models/usuario_from_fire_model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,8 @@ export class AuthService {
 
   constructor(
     // Importamos las clase de AFA para todo utilizar todo lo relacionado con el manejo del usuario
-    private afa: AngularFireAuth
+    private afa: AngularFireAuth,
+    private afs: AngularFirestore,
   ) {
     this.afa.authState.subscribe(user => {
       if (user) {
@@ -62,6 +65,22 @@ export class AuthService {
       }
     })
   }
+
+  // Método para setear la data del usuario nuevo en Firestore
+  setUserData(user: UserFromFirebase) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userData: UserFromFirebase = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+    };
+    return userRef.set(userData, {
+      merge: true
+    });
+  }
+
 
   // Detalles/Información del usuario logueado
   userDetails() {

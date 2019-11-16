@@ -4,4 +4,5 @@ export interface UserFromFirebase {
     phoneNumber?: string;
     photoURL?: string;
     emailVerified?: boolean;
+    uid?: string;
 }

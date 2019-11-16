@@ -8,10 +8,39 @@
 </ion-header>
 
 <ion-content class="ion-padding ion-text-center">
-  <ion-avatar style="margin: auto">
-    <img
-      [src]="(user?.photoURL) ? user.photoURL : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" />
-  </ion-avatar>
-  <h2>Hola {{(user?.displayName) ? user.displayName : 'Usuario bonito'}}</h2>
-  <p>{{user?.email}}</p>
+  <div *ngIf="!isEdit">
+    <ion-avatar style="margin: auto">
+      <img
+        [src]="(user?.photoURL) ? user.photoURL : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" />
+    </ion-avatar>
+    <h2>Hola {{(user?.displayName) ? user.displayName : 'Usuario bonito'}}</h2>
+    <p>{{user?.email}}</p>
+    <p>{{(user?.phoneNumber) ? user.phoneNumber : 'Sin número agregado aún.'}}</p>
+    <ion-button (click)="edit()">
+      Editar
+    </ion-button>
+  </div>
+  <div *ngIf="isEdit">
+    <form [formGroup]="profileForm">
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input formControlName="nombreUsuario" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Número telefónico</ion-label>
+        <ion-input formControlName="numeroTelefono" type="number"></ion-input>
+      </ion-item>
+    </form>
+
+    <ion-button expand="block" shape="round" color="primary" (click)="onSubmit()"
+      [disabled]="profileForm.invalid || cargando">
+      <ion-text *ngIf="!cargando">
+        Actualizar
+      </ion-text>
+      <ion-text *ngIf="cargando">
+        <ion-spinner name="crescent"></ion-spinner>
+      </ion-text>
+    </ion-button>
+  </div>
+
 </ion-content>
