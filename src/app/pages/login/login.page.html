@@ -25,10 +25,13 @@
             <ion-input required formControlName="password" type="password"></ion-input>
             <ion-badge *ngIf="loginForm?.value.password.length > 0 && loginForm?.value.password.length <8"
               style="margin-top: 20px; background-color: transparent!important;" slot="end">
-              {{loginForm?.value.password.length}}</ion-badge>
+              <ion-text color="primary">
+                {{loginForm?.value.password.length}}
+              </ion-text>
+            </ion-badge>
             <ion-badge *ngIf="loginForm?.value.password.length >= 8"
               style="margin-top: 20px; background-color: transparent!important;" slot="end">
-              <ion-icon name="checkmark"></ion-icon>
+              <ion-icon name="checkmark" color="primary"></ion-icon>
             </ion-badge>
           </ion-item>
           <ng-container *ngIf="errorMessage.length > 0">
@@ -39,19 +42,25 @@
             </div>
           </ng-container>
           <div *ngIf="isLogin">
-            <ion-button expand="block" shape="round" color="primary" type="submit" [disabled]="loginForm.invalid || cargando">
+            <ion-button expand="block" shape="round" color="primary" type="submit"
+              [disabled]="loginForm.invalid || cargando">
               <ion-text *ngIf="!cargando">
                 Iniciar sesión
-              </ion-text> 
+              </ion-text>
               <ion-text *ngIf="cargando">
                 <ion-spinner name="crescent"></ion-spinner>
               </ion-text>
             </ion-button>
           </div>
           <div *ngIf="!isLogin">
-            <ion-button expand="block" shape="round" color="primary" type="submit">
-              <!--[disabled]="loginForm.invalid"-->
-              Registrarme
+            <ion-button expand="block" shape="round" color="primary" type="submit"
+              [disabled]="loginForm.invalid || cargando">
+              <ion-text *ngIf="!cargando">
+                Registrarme
+              </ion-text>
+              <ion-text *ngIf="cargando">
+                <ion-spinner name="crescent"></ion-spinner>
+              </ion-text>
             </ion-button>
           </div>
         </form>
