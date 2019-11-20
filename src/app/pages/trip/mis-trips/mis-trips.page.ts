@@ -13,6 +13,7 @@ import { LoadingController } from '@ionic/angular';
 export class MisTripsPage implements OnInit {
 
   trips = [];
+  cargando = true;
 
   constructor(
     private loadingCtrl: LoadingController,
@@ -25,6 +26,7 @@ export class MisTripsPage implements OnInit {
       this.tripSerivce.getTrips(JSON.parse(localStorage.getItem('user')));
       this.presentLoading();
     }
+    console.log(this.trips);
   }
 
   async presentLoading() {
@@ -35,9 +37,13 @@ export class MisTripsPage implements OnInit {
       this.tripSerivce.listaTrips.subscribe(data => {
         this.trips = data;
         loadingEl.dismiss();
+        this.cargando = false;
       });
     });
+  }
 
+  eliminarTrip(t) {
+    this.tripSerivce.eliminarTrip(t.id);
   }
 
 }

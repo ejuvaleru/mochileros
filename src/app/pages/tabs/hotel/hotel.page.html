@@ -1,9 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>hotel</ion-title>
+    <ion-title>Hoteles</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-card *ngFor="let hotel of hoteles" class="ion-no-padding"  [routerLink]="['/', 'home', 'tabs', 'tab2', 'hotel',hotel.id]">
+      <ion-card-content class="card-background-page ion-no-padding"> 
+        <img class="my-card" [src]="hotel.urlImage" (error)="onImgError($event)"/>
+        <div class="overlay">
+          <div class="card-title">{{hotel.nombre}}</div>
+          <div class="card-subtitle">{{hotel.precio_noche |currency:'MXN'}}</div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>

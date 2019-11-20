@@ -7,29 +7,37 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-list>
-    <ion-card *ngFor="let t of trips" style="margin-top: 15px;">
-      <ion-item>
-        <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label>{{t.place}}</ion-label>
-        <ion-button fill="outline" slot="end">Editar</ion-button>
-      </ion-item>
+  <div *ngIf="trips.length>=1">
+    <ion-list>
+      <ion-card *ngFor="let t of trips" style="margin-top: 15px;">
+        <ion-item>
+          <ion-icon name="pin" slot="start"></ion-icon>
+          <ion-label>{{t.place}}</ion-label>
+          <ion-button (click)="eliminarTrip(t)" slot="end">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
 
-      <ion-card-content>
-        <p>
-          Presupuesto hospedaje: {{t.budgetHotel | currency:'MXN'}}
-        </p>
-        <p>
-          Presupuesto : {{t.budgetComida | currency:'MXN'}}
-        </p>
-        <p>
-          Presupuesto actividades: {{t.budgetDiversion | currency:'MXN'}}
-        </p>
-      </ion-card-content>
-      <ion-item>
-        <ion-icon name="calendar" slot="start"></ion-icon>
-        <ion-label>{{t.fechaIni | date:'mediumDate'}} - {{t.fechaFin | date:'mediumDate'}}</ion-label>
-      </ion-item>
-    </ion-card>
-  </ion-list>
+        <ion-card-content>
+          <p>
+            Presupuesto hospedaje: {{t.budgetHotel | currency:'MXN'}}
+          </p>
+          <p>
+            Presupuesto : {{t.budgetComida | currency:'MXN'}}
+          </p>
+          <p>
+            Presupuesto actividades: {{t.budgetDiversion | currency:'MXN'}}
+          </p>
+        </ion-card-content>
+        <ion-item>
+          <ion-icon name="calendar" slot="start"></ion-icon>
+          <ion-label>{{t.fechaIni | date:'mediumDate'}} - {{t.fechaFin | date:'mediumDate'}}</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-list>
+  </div>
+  <div *ngIf="trips.length === 0 && !cargando" class="ion-text-center">
+    <p>No hay trips aún.</p>
+    <p>¡Agrega tu primer Trip!</p>
+  </div>
 </ion-content>

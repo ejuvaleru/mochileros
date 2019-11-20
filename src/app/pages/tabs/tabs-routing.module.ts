@@ -25,7 +25,11 @@ const routes: Routes = [
                             {
                                 path: '',
                                 loadChildren: './hotel/hotel.module#HotelPageModule'
-                            }
+                            },
+                            {
+                                path: 'hotel/:hotelId',
+                                loadChildren: './detalles/detalles.module#DetallesPageModule',
+                            },
                         ]
                 },
                 {
@@ -52,7 +56,7 @@ const routes: Routes = [
                     path: '',
                     redirectTo: '/home/tabs/tab1',
                     pathMatch: 'full'
-                  }
+                }
             ]
     },
     {

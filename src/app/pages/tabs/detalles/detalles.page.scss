@@ -1,0 +1,31 @@
+ion-toolbar {
+    position: absolute;
+    --background: linear-gradient(
+        rgba(20, 20, 20, 0.45), 
+        rgba(10, 1, 1, 0.45)
+      );
+    --ion-color-base: transparent !important;
+    color: white !important;
+    font-weight: 900;
+}
+.background-page{
+    position: relative;
+    width: 100%;
+    height: 280px;
+    color: #ffffff;
+    overflow: hidden;
+    margin: auto;
+}
+.background-page img{
+    min-height: 300px;
+    min-width: 100%;
+    background-size: cover;
+    background-position: center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.desc{
+    font-size: 15px!important;
+    text-align: start;
+}

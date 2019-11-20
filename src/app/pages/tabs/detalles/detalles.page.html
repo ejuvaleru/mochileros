@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar translucent="true" no-border>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home/tabs/tab2"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{hotel?.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="background-page">
+    <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="tertiary">
+        <ion-icon name="heart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> -->
+    <img class="img-header" [src]="hotel?.urlImage" (error)="onImgError($event)">
+  </div>
+  <ion-item>
+    <ion-icon name="pin" slot="start"></ion-icon>
+    <ion-label>
+      {{destino?.nombre}}
+    </ion-label>
+    <ion-label>{{hotel?.precio_noche | currency:'MXN'}}</ion-label>
+  </ion-item>
+  <div class="descripcion ion-padding">
+    <h4>Descripción</h4>
+    <p class="desc">{{hotel?.descripcion}}</p>
+    <p class="desc">{{hotel?.locacion}}</p>
+  </div>
+
+</ion-content>
