@@ -10,7 +10,8 @@ import { LoadingController } from '@ionic/angular';
 })
 export class HotelPage implements OnInit {
 
-  hoteles: Hotel[];
+  hoteles = [];
+  destinos: any[];
   isLoading: boolean;
   imagenRespaldo = 'https://worldfoodtravel.org/wp-content/uploads/2019/06/no-image.jpg';
 
@@ -24,27 +25,34 @@ export class HotelPage implements OnInit {
   }
 
   async cargarData() {
-    this.isLoading = true;
-    await this.hotelService.getHotels().subscribe(res => {
-      this.hoteles = res;
-      console.log(this.hoteles);
-      this.isLoading = false;
-    });
-  }
+    await this.hotelService.getHotels().snapshotChanges().subscribe((hotelesSnapshot) => {
+      this.hoteles = [];
+      hotelesSnapshot.forEach((hotelData: any) => {
 
-  onImgError(event) {
-    event.target.src = this.imagenRespaldo;
-  }
+        const data = hotelData.payload.doc.data();
+        const id = hotelData.payload.doc.id;
 
-  async presentLoadingWithOptions() {
-    await this.loadingCtrl.create({
-      message: 'Cargando...'
-    }).then(loadingEl => {
-      loadingEl.present();
-      this.cargarData().then(() => {
-        loadingEl.dismiss();
+        this.hoteles.push({
+          id, ...data,
       });
     });
-  }
+    console.log(this.hoteles);
+  });
+}
+
+onImgError(event) {
+  event.target.src = this.imagenRespaldo;
+}
+
+async presentLoadingWithOptions() {
+  await this.loadingCtrl.create({
+    message: 'Cargando...'
+  }).then(loadingEl => {
+    loadingEl.present();
+    this.cargarData().then(() => {
+      loadingEl.dismiss();
+    });
+  });
+}
 
 }

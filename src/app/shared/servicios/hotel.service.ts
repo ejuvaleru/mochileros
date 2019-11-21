@@ -10,30 +10,20 @@ import { Hotel } from 'src/app/models/hotel_model';
 })
 export class HotelService {
 
-  private hotelesCollection: AngularFirestoreCollection<Hotel>;
-  private listaDeHoteles: Observable<Hotel[]>;
+  // private hotelesCollection: AngularFirestoreCollection<Hotel>;
+  // private listaDeHoteles: Observable<Hotel[]>;
 
   constructor(
     private afs: AngularFirestore
-  ) {
-    this.hotelesCollection = this.afs.collection('hoteles');
-
-    this.listaDeHoteles = this.hotelesCollection.snapshotChanges().pipe(map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    }));
-  }
+  ) { }
 
   // Obtener hoteles
   getHotels() {
-    return this.listaDeHoteles;
+    return this.afs.collection('hoteles');;
   }
 
   // Obtener hotel por ID
   getHotel(id: string) {
-    return this.hotelesCollection.doc<Hotel>(id).valueChanges();
+    return this.afs.collection('hoteles').doc(id);
   }
 }

@@ -43,4 +43,8 @@ export class TripService {
       });
     }));
   }
+
+  getTrip(id: string){
+    return this.afs.collection('trips').doc(id);
+  }
 }

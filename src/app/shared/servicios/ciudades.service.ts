@@ -8,28 +8,15 @@ import { map } from 'rxjs/operators';
 })
 export class CiudadesService {
 
-  private ciudadesCollection: AngularFirestoreCollection<any>;
-  private listaDeCiudades: Observable<any[]>;
-
   constructor(
     private afs: AngularFirestore
-  ) {
-    this.ciudadesCollection = this.afs.collection('destinos');
-
-    this.listaDeCiudades = this.ciudadesCollection.snapshotChanges().pipe(map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    }));
-  }
+  ) { }
 
   getCiudades() {
-    return this.listaDeCiudades;
+    return this.afs.collection('destinos');;
   }
 
   getCiudad(id: string) {
-    return this.ciudadesCollection.doc<any>(id).valueChanges();
+    return this.afs.collection('destinos').doc(id);
   }
 }

@@ -10,8 +10,10 @@
   <div>
     <form [formGroup]="tripForm" (ngSubmit)="onSubmit()">
       <ion-item>
-        <ion-label position="floating">¿A dónde?</ion-label>
-        <ion-input required formControlName="lugar" type="text"></ion-input>
+        <ion-label>¿A dónde?</ion-label>
+        <ion-select placeholder="Seleccione un Destino"  formControlName="lugar" >
+          <ion-select-option *ngFor="let d of destinos" [value]="d.nombre">{{d.nombre}}</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label>Fecha de inicio</ion-label>

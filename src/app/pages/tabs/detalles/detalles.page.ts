@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HotelService } from 'src/app/shared/servicios/hotel.service';
 import { Hotel } from 'src/app/models/hotel_model';
 import { NavController } from '@ionic/angular';
 import { CiudadesService } from 'src/app/shared/servicios/ciudades.service';
+import { Location } from '@angular/common';
+import { Destino } from 'src/app/models/destino_model';
 
 @Component({
   selector: 'app-detalles',
@@ -13,7 +15,7 @@ import { CiudadesService } from 'src/app/shared/servicios/ciudades.service';
 export class DetallesPage implements OnInit {
 
   hotel: Hotel;
-  destino: any;
+  destino: Destino;
   idHotel: string;
   imagenRespaldo = 'https://worldfoodtravel.org/wp-content/uploads/2019/06/no-image.jpg';
 
@@ -21,7 +23,7 @@ export class DetallesPage implements OnInit {
     private route: ActivatedRoute,
     private navCtrl: NavController,
     private hotelService: HotelService,
-    private ciudadService: CiudadesService
+    private ciudadService: CiudadesService,
   ) { }
 
   ngOnInit() {
@@ -32,11 +34,12 @@ export class DetallesPage implements OnInit {
       }
       this.idHotel = paramMap.get('hotelId');
 
-      this.hotelService.getHotel(this.idHotel).subscribe(h => {
+      this.hotelService.getHotel(this.idHotel).valueChanges().subscribe((h: Hotel) => {
+        console.log(h);
         this.hotel = h;
-        this.ciudadService.getCiudad(h.destinoReference).subscribe(d=>{
+        this.ciudadService.getCiudad(this.hotel.destinoReference).valueChanges().subscribe((d: Destino)=>{
           this.destino = d;
-        });
+        }); 
       });
     });
   }

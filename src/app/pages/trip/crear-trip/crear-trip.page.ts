@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 import { TripDb } from 'src/app/models/trip_model';
 import { TripService } from 'src/app/shared/trip.service';
 import { Router } from '@angular/router';
+import { CiudadesService } from 'src/app/shared/servicios/ciudades.service';
 
 @Component({
   selector: 'app-crear-trip',
@@ -15,11 +16,14 @@ export class CrearTripPage implements OnInit {
   tripForm: FormGroup;
   uid = '';
   cargando = false;
+  destinos = [];
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
     private tripService: TripService,
+    private ciudadService: CiudadesService
   ) { }
 
   ngOnInit() {
@@ -27,6 +31,20 @@ export class CrearTripPage implements OnInit {
     if (this.authService.isLoggedIn()) {
       this.uid = JSON.parse(localStorage.getItem('user'));
     }
+    this.getDestinos();
+  }
+
+  getDestinos() {
+    this.ciudadService.getCiudades().snapshotChanges().subscribe((destinoSnapshot) => {
+      this.destinos = [];
+      destinoSnapshot.forEach(destino => {
+        const data = destino.payload.doc.data();
+        const id = destino.payload.doc.id;
+        this.destinos.push(
+          { id, ...data }
+        );
+      });
+    });
   }
 
   setUpFrom() {
