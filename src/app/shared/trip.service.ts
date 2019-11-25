@@ -16,7 +16,6 @@ export class TripService {
   
   constructor(
     private afs: AngularFirestore,
-    private authService: AuthService,
   ) { }
 
   crearTrip(trip: TripDb) {
@@ -38,7 +37,6 @@ export class TripService {
       return res.map(a => {
         const data = a.payload.doc.data();
         const id = a.payload.doc.id;
-        console.log(data);
         return { id, ...data };
       });
     }));

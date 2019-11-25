@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { HotelPage } from './hotel.page';
+import { HideHeaderDirective } from 'src/app/hide-header.directive';
 
 const routes: Routes = [
   {
@@ -19,8 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    
   ],
-  declarations: [HotelPage]
+  declarations: [HotelPage, HideHeaderDirective]
 })
 export class HotelPageModule {}

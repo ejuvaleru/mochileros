@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 import { Destino } from 'src/app/models/destino_model';
 import { CiudadesService } from 'src/app/shared/servicios/ciudades.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { PresupuestoService } from 'src/app/shared/presupuesto.service';
 
 @Component({
   selector: 'app-mis-trips',
@@ -17,12 +20,16 @@ export class MisTripsPage implements OnInit {
   trips = [];
   cargando = true;
   destino: Destino;
+  fechaFin: Date;
+  fechaActual: Date;
 
   constructor(
+    private location: Location,
+    private router: Router,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private tripSerivce: TripService,
-    private ciudadService: CiudadesService
+    private presupuestoService: PresupuestoService
   ) { }
 
   ngOnInit() {
@@ -47,6 +54,16 @@ export class MisTripsPage implements OnInit {
 
   eliminarTrip(t) {
     this.tripSerivce.eliminarTrip(t.id);
+    this.fechaActual = new Date();
+    this.fechaFin = new Date(t.fechaFin);
+    if (this.fechaFin.getDate() >= this.fechaActual.getDate()) {
+      console.log('SÍ SE RESETEA');
+      this.presupuestoService.resetPresupuesto();
+    }
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

@@ -7,14 +7,22 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding ion-text-center">
-  ¡Aquí va la mejor app de Mochileros del mundo!
-  <p>En construcción... Hola {{user?.email}}</p>
-  <ion-card>
-    <ion-card-header>
-      Trip actual
+    <div *ngIf="!hayGrafico">
+      <ion-button style="text-transform:none" (click)="crearMiTrip()" expand="block" shape="round" color="primary">
+        ¡Viajemos!
+      </ion-button>
+    </div>
+  <ion-card [ngClass]="hayGrafico ? 'uncheckedClass' : 'checkedClass'">
+    <ion-card-header *ngIf="hayGrafico && tripActual">
+      <h2>Viaje actual: {{tripActual?.place}}</h2>
     </ion-card-header>
     <ion-card-content>
       <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+    <ion-card-content *ngIf="hayGrafico && tripActual">
+      <p>Fecha inicio: {{tripActual?.fechaIni | date:'mediumDate'}}</p>
+      <p>Fecha final: {{tripActual?.fechaFin | date:'mediumDate'}}</p>
+      <p>Dias restantes {{diasRestantes}}</p>
     </ion-card-content>
   </ion-card>
 

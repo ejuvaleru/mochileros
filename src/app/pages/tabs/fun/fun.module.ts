@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { FunPage } from './fun.page';
+import { HideHeaderActividadesDirective } from 'src/app/utils/hide-header-actividades.directive';
 
 const routes: Routes = [
   {
@@ -21,6 +22,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FunPage]
+  declarations: [FunPage, HideHeaderActividadesDirective]
 })
 export class FunPageModule {}

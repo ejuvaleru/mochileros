@@ -39,7 +39,11 @@ const routes: Routes = [
                             {
                                 path: '',
                                 loadChildren: './restaurant/restaurant.module#RestaurantPageModule'
-                            }
+                            },
+                            {
+                                path: 'restaurante/:resId',
+                                loadChildren: './detalles/detalles.module#DetallesPageModule',
+                            },
                         ]
                 },
                 {

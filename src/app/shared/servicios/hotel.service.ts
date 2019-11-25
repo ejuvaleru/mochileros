@@ -19,7 +19,7 @@ export class HotelService {
 
   // Obtener hoteles
   getHotels() {
-    return this.afs.collection('hoteles');;
+    return this.afs.collection('hoteles');
   }
 
   // Obtener hotel por ID

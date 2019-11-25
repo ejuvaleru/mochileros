@@ -1,9 +1,20 @@
-<ion-header>
+<ion-header #myheader>
   <ion-toolbar>
-    <ion-title>restaurant</ion-title>
+    <ion-title>Restaurantes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content fullscreen [scrollEvents]="true" [header]="myheader" appHideHeaderRestaurantes>
+  <ion-list>
+    <ion-card *ngFor="let r of restaurantesFiltrados" class="ion-no-padding"
+      [routerLink]="['/', 'home', 'tabs', 'tab2', 'restaurante',r.id]">
+      <ion-card-content class="card-background-page ion-no-padding">
+        <img class="my-card" [src]="r.urlImage" (error)="onImgError($event)" />
+        <div class="overlay">
+          <div class="card-title">{{r.nombre}}</div>
+          <div class="card-subtitle">{{r.precio_promedio |currency:'MXN'}}</div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
