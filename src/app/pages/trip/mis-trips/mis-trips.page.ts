@@ -58,6 +58,12 @@ export class MisTripsPage implements OnInit {
     this.fechaFin = new Date(t.fechaFin);
     if (this.fechaFin.getDate() >= this.fechaActual.getDate()) {
       console.log('SÍ SE RESETEA');
+      this.tripSerivce.trip.next(null);
+      this.tripSerivce.trip.pipe().subscribe(
+        r=>{
+          console.log(r);
+        }
+      );
       this.presupuestoService.resetPresupuesto();
     }
   }

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import { UsuarioNuevo } from 'src/app/models/usuario_nuevo_model';
 import { UserFromFirebase } from 'src/app/models/usuario_from_fire_model';
+import { PresupuestoService } from 'src/app/shared/presupuesto.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -43,6 +45,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
+    private presupuestoService: PresupuestoService,
   ) { }
 
   ngOnInit() {
@@ -80,6 +83,9 @@ export class LoginPage implements OnInit {
         console.log(res);
         this.errorMessage = "";
         this.cargando = false;
+        this.presupuestoService.presupuestoHotel = new BehaviorSubject<number>(0);
+        this.presupuestoService.presupuestoComida = new BehaviorSubject<number>(0);
+        this.presupuestoService.presupuestoDiversion = new BehaviorSubject<number>(0);
         this.router.navigateByUrl('home/tabs/tab1', { replaceUrl: true });
       }, err => {
         console.log(err);

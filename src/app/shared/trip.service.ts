@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { TripDb } from '../models/trip_model';
 import { AuthService } from './auth.service';
 import { map } from 'rxjs/operators';
@@ -13,7 +13,8 @@ export class TripService {
 
   private tripsCollection: AngularFirestoreCollection<TripDb>; // Colección en Firestore de TripDb
   listaTrips: Observable<TripDb[]>; // Referencia a una lista trips
-  
+  trip = new BehaviorSubject<any>(null);
+
   constructor(
     private afs: AngularFirestore,
   ) { }
@@ -42,7 +43,7 @@ export class TripService {
     }));
   }
 
-  getTrip(id: string){
+  getTrip(id: string) {
     return this.afs.collection('trips').doc(id);
   }
 }

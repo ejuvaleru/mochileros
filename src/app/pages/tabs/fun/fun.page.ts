@@ -29,7 +29,7 @@ export class FunPage implements OnInit {
 
   ngOnInit() {
     this.presentLoadingWithOptions();
-    this.pPromedio = this.presupuestoService.getPresupuestoComida();
+    this.pPromedio = this.presupuestoService.getPresupuestoDiversion();
   }
 
 

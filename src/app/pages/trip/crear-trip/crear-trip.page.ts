@@ -27,7 +27,7 @@ export class CrearTripPage implements OnInit {
   fechaMinima;
   fechaFinal: Date;
   trips = [];
-  siPuedo = false;
+  siPuedo: boolean;
 
   fecha = [];
 
@@ -48,10 +48,15 @@ export class CrearTripPage implements OnInit {
     this.setUpFrom();
     if (this.authService.isLoggedIn()) {
       this.uid = JSON.parse(localStorage.getItem('user'));
+      console.log('UID ', this.uid);
       this.tripService.getTrips(this.uid);
       this.tripService.listaTrips.subscribe((data) => {
         // console.log('TRIPS FROM CREAR ', data);
         this.trips = data;
+        console.log(this.trips.length);
+        if (this.trips.length === 0) {
+          this.siPuedo = true;
+        }
         this.trips.forEach(t => {
           this.fechaActual = new Date();
           this.fechaFinal = new Date(t.fechaFin);
@@ -60,11 +65,11 @@ export class CrearTripPage implements OnInit {
             // console.log('Fecha FINAL', this.fechaFinal);
             // console.log('Fecha ACUTAL', this.fechaActual);
             // console.log('NO PUEDES TENER MÁS DE UN VIAJE ACTIVO');
-            // console.log('PUEDO 1? ', this.siPuedo);
+            console.log('PUEDO 1? ', this.siPuedo);
             return;
           } else {
             this.siPuedo = true;
-            // console.log('PUEDO 2?', this.siPuedo);
+            console.log('PUEDO 2?', this.siPuedo);
           }
         });
       });
@@ -114,6 +119,7 @@ export class CrearTripPage implements OnInit {
       this.presentAlert('Por favor selecciona una fecha de finalización mayor a la de inicio.');
       return;
     }
+    console.log('SI PUEDO? SUBMIT', this.siPuedo);
     if (this.siPuedo) {
       this.tripService.crearTrip(tripData).then(r => {
         this.cargando = false;
@@ -127,6 +133,7 @@ export class CrearTripPage implements OnInit {
       });
     } else {
       this.presentAlert('No puedes crear un Trip cuando tienes uno activo. Elimina o espera a que tu Trip actual acabe.');
+      return;
     }
   }
 
