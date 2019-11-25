@@ -1,13 +1,15 @@
 <ion-header>
   <ion-toolbar translucent="true" no-border>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home/tabs/tab2"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{hotel?.nombre}}</ion-title>
+    <ion-title *ngIf="hotel">{{hotel?.nombre}}</ion-title>
+    <ion-title *ngIf="restaurante">{{restaurante?.nombre}}</ion-title>
+    <ion-title *ngIf="actividad">{{actividad?.nombre}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content fullscreen *ngIf="hotel">
   <div class="background-page">
     <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button color="tertiary">
@@ -28,5 +30,53 @@
     <p class="desc">{{hotel?.descripcion}}</p>
     <p class="desc">{{hotel?.locacion}}</p>
   </div>
-
 </ion-content>
+<!-- INICIA RESTAURANTE -->
+<ion-content fullscreen *ngIf="restaurante">
+  <div class="background-page">
+    <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="tertiary">
+          <ion-icon name="heart"></ion-icon>
+        </ion-fab-button>
+      </ion-fab> -->
+    <img class="img-header" [src]="restaurante?.urlImage" (error)="onImgError($event)">
+  </div>
+  <ion-item>
+    <ion-icon name="pin" slot="start"></ion-icon>
+    <ion-label>
+      {{restaurante?.nombre}}
+    </ion-label>
+    <ion-label>{{restaurante?.precio_promedio | currency:'MXN'}}</ion-label>
+  </ion-item>
+  <div class="descripcion ion-padding">
+    <h4>Descripción</h4>
+    <p class="desc">{{restaurante?.descripcion}}</p>
+    <p class="desc">{{restaurante?.locacion}}</p>
+  </div>
+</ion-content>
+<!-- TERMINA RESTAURANTE -->
+
+<!-- INICIA ACTIVIDAD -->
+<ion-content fullscreen *ngIf="actividad">
+    <div class="background-page">
+      <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button color="tertiary">
+            <ion-icon name="heart"></ion-icon>
+          </ion-fab-button>
+        </ion-fab> -->
+      <img class="img-header" [src]="actividad?.urlImage" (error)="onImgError($event)">
+    </div>
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>
+        {{actividad?.nombre}}
+      </ion-label>
+      <ion-label>{{actividad?.precio_promedio | currency:'MXN'}}</ion-label>
+    </ion-item>
+    <div class="descripcion ion-padding">
+      <h4>Descripción</h4>
+      <p class="desc">{{actividad?.descripcion}}</p>
+      <p class="desc">{{actividad?.locacion}}</p>
+    </div>
+  </ion-content>
+<!-- TERMINA ACTIVIDAD -->

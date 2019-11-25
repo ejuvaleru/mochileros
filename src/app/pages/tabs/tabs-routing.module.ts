@@ -53,7 +53,11 @@ const routes: Routes = [
                             {
                                 path: '',
                                 loadChildren: './fun/fun.module#FunPageModule'
-                            }
+                            },
+                            {
+                                path: 'actividad/:actividadId',
+                                loadChildren: './detalles/detalles.module#DetallesPageModule',
+                            },
                         ]
                 },
                 {

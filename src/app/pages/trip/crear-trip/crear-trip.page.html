@@ -11,17 +11,19 @@
     <form [formGroup]="tripForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label>¿A dónde?</ion-label>
-        <ion-select placeholder="Seleccione un Destino"  formControlName="lugar" >
+        <ion-select placeholder="Seleccione un Destino" formControlName="lugar">
           <ion-select-option *ngFor="let d of destinos" [value]="d.nombre">{{d.nombre}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label>Fecha de inicio</ion-label>
-        <ion-datetime formControlName="fechaI" displayFormat="DD MM YY" placeholder="DD MM YY"></ion-datetime>
+        <ion-datetime formControlName="fechaI" [min]="fechaMinima" displayFormat="DD MM YY" placeholder="DD MM YY">
+        </ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>Fecha de finalización</ion-label>
-        <ion-datetime formControlName="fechaF" displayFormat="DD MM YY" placeholder="DD MM YY"></ion-datetime>
+        <ion-datetime formControlName="fechaF" [min]="fechaMinima" displayFormat="DD MM YY" placeholder="DD MM YY">
+        </ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Presupuesto Hospedaje</ion-label>

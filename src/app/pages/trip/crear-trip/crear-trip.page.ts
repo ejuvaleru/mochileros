@@ -24,9 +24,12 @@ export class CrearTripPage implements OnInit {
   destinos = [];
 
   fechaActual: Date;
+  fechaMinima;
   fechaFinal: Date;
   trips = [];
   siPuedo = false;
+
+  fecha = [];
 
   constructor(
     private alertCtrl: AlertController,
@@ -39,6 +42,9 @@ export class CrearTripPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.fechaActual = new Date();
+    this.fechaMinima = this.fechaActual.toISOString().split('T')[0];;
+    console.log(this.fechaMinima);
     this.setUpFrom();
     if (this.authService.isLoggedIn()) {
       this.uid = JSON.parse(localStorage.getItem('user'));
@@ -102,6 +108,12 @@ export class CrearTripPage implements OnInit {
       budgetDiversion: formTrip.diversionP,
       place: formTrip.lugar
     };
+    this.fechaFinal = new Date(tripData.fechaFin);
+    const dias = this.fechaFinal.getDate() - this.fechaActual.getDate();
+    if (dias <= 0) {
+      this.presentAlert('Por favor selecciona una fecha de finalización mayor a la de inicio.');
+      return;
+    }
     if (this.siPuedo) {
       this.tripService.crearTrip(tripData).then(r => {
         this.cargando = false;

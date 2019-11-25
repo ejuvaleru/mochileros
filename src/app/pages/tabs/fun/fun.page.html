@@ -1,4 +1,4 @@
-<ion-header #myheader>
+<ion-header #myheader no-border>
   <ion-toolbar>
     <ion-title>Actividades</ion-title>
   </ion-toolbar>
@@ -7,7 +7,7 @@
 <ion-content fullscreen [scrollEvents]="true" [header]="myheader" appHideHeaderActividades>
   <ion-list>
     <ion-card *ngFor="let a of actividadesFiltradas" class="ion-no-padding"
-      [routerLink]="['/', 'home', 'tabs', 'tab2', 'actividad',a.id]">
+      [routerLink]="['/', 'home', 'tabs', 'tab4', 'actividad', a.id]">
       <ion-card-content class="card-background-page ion-no-padding">
         <img class="my-card" [src]="a.urlImage" (error)="onImgError($event)" />
         <div class="overlay">
